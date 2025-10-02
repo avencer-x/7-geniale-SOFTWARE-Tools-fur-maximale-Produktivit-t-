@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON GAMING HUB - Deine Gaming-Community</title>
+    <style>
+        /* CSS Custom Properties für konsistente Farben */
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent-color: #00d4ff;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --focus-color: #00d4ff;
+            --hover-color: #0099cc;
+        }
+
+        /* Reset und Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-bg);
+            font-size: 16px;
+        }
+
+        /* Skip Link für Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 9999;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Focus Management */
+        *:focus {
+            outline: 3px solid var(--focus-color);
+            outline-offset: 2px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--secondary-bg);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            background: var(--hover-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        nav a[aria-current="page"] {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(128, 0, 255, 0.1));
+            padding: 4rem 1rem;
+            text-align: center;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.25rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background: var(--hover-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        /* Games Grid */
+        .games-section {
+            padding: 4rem 1rem;
+            background: var(--secondary-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .game-card {
+            background: var(--primary-bg);
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover,
+        .game-card:focus-within {
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .game-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .game-description {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .game-rating {
+            margin-bottom: 1.5rem;
+        }
+
+        .rating-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .stars {
+            color: var(--warning-color);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-bg);
+            padding: 3rem 1rem 2rem;
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover,
+        .footer-links a:focus {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.75rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-bg: #000000;
+                --text-primary: #ffffff;
+                --accent-color: #00ffff;
+            }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .hero {
+                background: none;
+                color: black;
+            }
+            
+            .btn {
+                border: 2px solid black;
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link für Screenreader -->
+    <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+
+    <header role="banner">
+        <h1>🎮 NEON GAMING HUB</h1>
+        <p class="subtitle">Deine ultimative Gaming-Community</p>
+    </header>
+
+    <nav role="navigation" aria-label="Hauptnavigation">
+        <div class="nav-container">
+            <a href="#home" aria-current="page">Startseite</a>
+            <a href="#games">Spiele</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#community">Community</a>
+            <a href="#tournaments">Turniere</a>
+        </div>
+    </nav>
+
+    <main id="main-content" role="main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <h2 id="hero-title">Die ultimative Gaming-Experience wartet auf dich</h2>
+                <p>Entdecke tausende von Spielen, tritt der Community bei und erlebe Gaming auf einem neuen Level. Von Indie-Perlen bis zu AAA-Blockbustern - hier findest du alles.</p>
+                <a href="#games" class="btn" role="button">Spiele entdecken</a>
+            </div>
+        </section>
+
+        <section class="games-section" aria-labelledby="games-title">
+            <div class="container">
+                <h2 id="games-title" class="section-title">Beliebte Spiele</h2>
+                
+                <div class="games-grid" role="grid" aria-label="Spiele-Übersicht">
+                    <article class="game-card" role="gridcell">
+                        <h3 class="game-title">CYBER WARS 2077</h3>
+                        <p class="game-description">
+                            Ein futuristisches Action-Spiel in einer dystopischen Cyberpunk-Welt. 
+                            Erlebe intensive Kämpfe und eine fesselnde Story in Neo-Tokyo.
+                        </p>
+                        <div class="game-rating">
+                            <span class="rating-label">Bewertung:</span>
+                            <div class="stars" role="img" aria-label="5 von 5 Sternen">
+                                ★★★★★
+                                <span class="sr-only">Sehr gut bewertet</span>
+                            </div>
+                        </div>
+                        <button class="btn" type="button" aria-describedby="cyber-wars-desc">
+                            Jetzt spielen
+                        </button>
+                        <span id="cyber-wars-desc" class="sr-only">
+                            Startet das Spiel Cyber Wars 2077
+                        </span>
+                    </article>
+
+                    <article class="game-card" role="gridcell">
+                        <h3 class="game-title">NEON RACER</h3>
+                        <p class="game-description">
+                            Rasante Rennen durch neonbeleuchtete Straßen bei Nacht. 
+                            Wähle aus über 50 Fahrzeugen und dominiere die Straßen.
+                        </p>
+                        <div class="game-rating">
+                            <span class="rating-label">Bewertung:</span>
+                            <div class="stars" role="img" aria-label="4 von 5 Sternen">
+                                ★★★★☆
+                                <span class="sr-only">Gut bewertet</span>
+                            </div>
+                        </div>
+                        <button class="btn" type="button" aria-describedby="neon-racer-desc">
+                            Jetzt spielen
+                        </button>
+                        <span id="neon-racer-desc" class="sr-only">
+                            Startet das Spiel Neon Racer
+                        </span>
+                    </article>
+
+                    <article class="game-card" role="gridcell">
+                        <h3 class="game-title">SPACE ODYSSEY</h3>
+                        <p class="game-description">
+                            Erkunde unendliche Galaxien und kämpfe gegen außerirdische Bedrohungen. 
+                            Ein episches Weltraum-Abenteuer mit atemberaubender Grafik.
+                        </p>
+                        <div class="game-rating">
+                            <span class="rating-label">Bewertung:</span>
+                            <div class="stars" role="img" aria-label="5 von 5 Sternen">
+                                ★★★★★
+                                <span class="sr-only">Sehr gut bewertet</span>
+                            </div>
+                        </div>
+                        <button class="btn" type="button" aria-describedby="space-odyssey-desc">
+                            Jetzt spielen
+                
